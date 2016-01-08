@@ -5,8 +5,10 @@ module.exports = function(grunt) {
 	    target: {
 		files: {
 		    'app/js/ownwebapp.min.js': ['bower_components/angular/angular.min.js',
-						'bower_components/bootstrap/dist/js/bootstrap.min.js',
-						'bower_components/jquery/dist/jquery.min.js']
+						'bower_components/angular-route/angular-route.min.js',
+						'bower_components/jquery/dist/jquery.min.js',
+						'bower_components/bootstrap/dist/js/bootstrap.min.js'
+						]
 		}
 	    }
 	},
@@ -18,7 +20,8 @@ module.exports = function(grunt) {
 	    target: {
 		files: {
 		    'app/css/ownwebapp.min.css': ['bower_components/bootstrap/dist/css/bootstrap.min.css',
-						  'bower_components/bootstrap/dist/css/bootstrap-theme.min.css']
+						  'bower_components/bootstrap/dist/css/bootstrap-theme.min.css',
+						  'app/css/main.css']
 		}
 	    }
 	}

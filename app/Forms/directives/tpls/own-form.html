@@ -1,13 +1,8 @@
 <div ng-controller="LoginController as login">
-<form ng-submit="stLogin()" name="login">
-  <div class="form-group">
-    <label for="login-Form-nick">Nick</label>
-    <input type="nick" class="form-control" id="loginForm-nick" placeholder="Nick" ng-model="login.userName" ng-pattern="/^[A-Za-z0-9]{1,15}$/" required>
-  </div>
-  <div class="form-group">
-    <label for="login-Form-password">Password</label>
-    <input type="password" class="form-control" id="loginForm-password" placeholder="Password" ng-model="login.password" required>
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
+  <form ng-submit="stLogin()" name="login">
+    <div ng-repeat="options in model track by $index">
+      <own-input model="{{options}}"></own-input>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
 </div>

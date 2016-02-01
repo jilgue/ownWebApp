@@ -36,6 +36,21 @@ var LoginController = FormMod.controller('LoginController', ['$scope', '$http', 
 
 var ownForm = FormMod.directive('ownForm', function() {
     return {
-	templateUrl: '../Forms/directives/tpls/own-form.html'
+	restrict: 'E',
+	templateUrl: '/Forms/directives/tpls/own-form.html',
+	scope: {model: '@'},
+	link: function(scope, elm, attrs) {
+
+	    scope.model = [{field: 'nick', direction: 'ASC', name: 'Nick alfabético ascendente'},
+			   {field: '3nick', direction: 'ASC3', name: 'Nick alfabético 2ascendente'}];
+	}
+    };
+});
+
+var ownInput = FormMod.directive('ownInput', function() {
+    return {
+	restrict: 'E',
+	templateUrl: '/Forms/directives/tpls/own-input.html',
+	scope: {model: '@'}
     };
 });

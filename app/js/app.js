@@ -1,22 +1,20 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-angular.module('ownApp', ['ngRoute', 'loginModule']);
+var ownApp = angular.module('ownApp', ['ngRoute', 'Forms']);
 
-angular.module('ownApp').config(function ($routeProvider, $locationProvider) {
+ownApp.config(function ($routeProvider, $locationProvider) {
     $routeProvider
 	.when('/login', {
-	    templateUrl: 'views/login.html',
-	    controller: 'LoginController',
-	    controllerAs: 'login'
+	    templateUrl: 'views/login.html'
 	});
     $routeProvider.otherwise({ redirectTo: '/login' });
     //$locationProvider.html5Mode(true); //activate HTML5 Mode
 });
 
-var loginModule = angular.module('loginModule', []);
+var FormMod = angular.module('Forms', []);
 
-loginModule.controller('LoginController', ['$scope', '$http', function ($scope, $http) {
+var LoginController = FormMod.controller('LoginController', ['$scope', '$http', function ($scope, $http) {
 
     $scope.stLogin = function() {
 
@@ -35,3 +33,9 @@ loginModule.controller('LoginController', ['$scope', '$http', function ($scope, 
 	    });
     };
 }]);
+
+var ownForm = FormMod.directive('ownForm', function() {
+    return {
+	templateUrl: '../Forms/directives/tpls/own-form.html'
+    };
+});

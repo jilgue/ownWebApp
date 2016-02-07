@@ -67,18 +67,6 @@ var ownForm = FormMod.directive('ownForm', function() {
     };
 });
 
-var ownInput = FormMod.directive('ownInput', function() {
-    return {
-	restrict: 'E',
-	templateUrl: '/Forms/directives/tpls/own-input.html',
-	name: 'ctrl',
-	controller: '@',
-	controllerAs: 'input',
-	scope: {field: '@',
-		inputType: '@'}
-    };
-});
-
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }

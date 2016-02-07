@@ -28,16 +28,22 @@ var LoginViewController = LoginMod.controller('LoginViewController', ['$scope', 
 
 var FormMod = angular.module('Forms', []);
 
-var LoginController = FormMod.controller('LoginController', ['$scope', '$http', function ($scope, $http) {
+var LoginController = LoginMod.controller('LoginController', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
 
-    $scope.stLogin = function() {
+    $scope.$watch("model",function(newValue,OldValue,scope){
+	if (newValue){
+	    $scope.model = JSON.parse(newValue);
+	}
+    });
 
-	console.log($scope.login);
+    $scope.stSubmit = function() {
+
+	console.log($scope.form);
 
 	$http.post('http://192.168.56.110/apirest/user/login.json',
 		   $.param({
-		       userName: $scope.login.userName,
-		       password: $scope.login.password
+		       userName: $scope.form.userName,
+		       password: $scope.form.password
 		   }),{
 		       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }}
 		  ).
@@ -54,14 +60,10 @@ var ownForm = FormMod.directive('ownForm', function() {
     return {
 	restrict: 'E',
 	templateUrl: '/Forms/directives/tpls/own-form.html',
-	scope: {model: '@'},
-	controller: function ($scope, $timeout) {
-	    $scope.$watch("model",function(newValue,OldValue,scope){
-		if (newValue){
-		    $scope.model = JSON.parse(newValue);
-		}
-	    });
-	}
+	name: 'ctrl',
+	controller: '@',
+	controllerAs: 'form',
+	scope: {model: '@'}
     };
 });
 
@@ -69,6 +71,9 @@ var ownInput = FormMod.directive('ownInput', function() {
     return {
 	restrict: 'E',
 	templateUrl: '/Forms/directives/tpls/own-input.html',
+	name: 'ctrl',
+	controller: '@',
+	controllerAs: 'input',
 	scope: {field: '@',
 		inputType: '@'}
     };

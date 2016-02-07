@@ -1,9 +1,9 @@
-<div ng-controller="LoginController as login">
-  <form ng-submit="stLogin()" name="login">
+<div>
+  <form ng-submit="stSubmit()" name="form">
     <div ng-repeat="options in model track by $index">
       <div class="form-group">
 	<label for="Form-{{options.field}}">{{options.field}}</label>
-	<input type="{{options.inputType}}" class="form-control" id="loginForm-{{options.field}}" placeholder="{{options.field | lowercase}}" ng-model="login[options.field]" required>
+	<input type="{{options.inputType}}" class="form-control" id="loginForm-{{options.field}}" placeholder="{{options.field | lowercase}}" ng-model="form[options.field]" required>
       </div>
     </div>
     <button type="submit" class="btn btn-default">Submit</button>

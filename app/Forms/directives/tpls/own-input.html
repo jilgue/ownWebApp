@@ -1,9 +1,4 @@
 <div class="form-group">
-  <label for="login-Form-nick">Nick</label>
-  <input type="input" class="form-control" id="loginForm-nick" placeholder="Nick" ng-model="login.userName" ng-pattern="/^[A-Za-z0-9]{1,15}$/" required>
+  <label for="Form-{{field}}">{{field}}</label>
+  <input type="{{inputType}}" class="form-control" id="loginForm-{{field}}" placeholder="{{field | lowercase}}" ng-model="login[field]" required>
 </div>
-
-    <div class="form-group">
-      <label for="login-Form-password">Password</label>
-      <input type="password" class="form-control" id="loginForm-password" placeholder="Password" ng-model="login.password" required>
-    </div>

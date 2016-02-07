@@ -1,22 +1,38 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-var ownApp = angular.module('ownApp', ['ngRoute', 'Forms']);
+var ownApp = angular.module('ownApp', ['ngRoute', 'Forms', 'Login']);
 
 ownApp.config(function ($routeProvider, $locationProvider) {
     $routeProvider
 	.when('/login', {
-	    templateUrl: 'views/login.html'
+	    templateUrl: 'views/login.html',
+	    controller: 'LoginViewController'
 	});
     $routeProvider.otherwise({ redirectTo: '/login' });
     //$locationProvider.html5Mode(true); //activate HTML5 Mode
 });
+
+var LoginMod = angular.module('Login', []);
+
+var LoginViewController = LoginMod.controller('LoginViewController', ['$scope', '$http', function ($scope, $http) {
+
+    $http.get('http://192.168.56.110/apiconf/user/stLogin.json').
+	success(function(data, status, headers, config) {
+	    $scope.model = data.config;
+	}).
+	error(function(data, status, headers, config) {
+	    console.log("mal", data, status, headers, config);
+	});
+}]);
 
 var FormMod = angular.module('Forms', []);
 
 var LoginController = FormMod.controller('LoginController', ['$scope', '$http', function ($scope, $http) {
 
     $scope.stLogin = function() {
+
+	console.log($scope.login);
 
 	$http.post('http://192.168.56.110/apirest/user/login.json',
 		   $.param({
@@ -39,10 +55,12 @@ var ownForm = FormMod.directive('ownForm', function() {
 	restrict: 'E',
 	templateUrl: '/Forms/directives/tpls/own-form.html',
 	scope: {model: '@'},
-	link: function(scope, elm, attrs) {
-
-	    scope.model = [{field: 'nick', direction: 'ASC', name: 'Nick alfabético ascendente'},
-			   {field: '3nick', direction: 'ASC3', name: 'Nick alfabético 2ascendente'}];
+	controller: function ($scope, $timeout) {
+	    $scope.$watch("model",function(newValue,OldValue,scope){
+		if (newValue){
+		    $scope.model = JSON.parse(newValue);
+		}
+	    });
 	}
     };
 });
@@ -51,6 +69,11 @@ var ownInput = FormMod.directive('ownInput', function() {
     return {
 	restrict: 'E',
 	templateUrl: '/Forms/directives/tpls/own-input.html',
-	scope: {model: '@'}
+	scope: {field: '@',
+		inputType: '@'}
     };
 });
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}

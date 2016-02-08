@@ -26,10 +26,9 @@ var LoginViewController = LoginMod.controller('LoginViewController', ['$scope', 
 	});
 }]);
 
-var FormMod = angular.module('Forms', []);
-
 var LoginController = LoginMod.controller('LoginController', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
 
+    // Necesario para los formularios, ya que el model nos llega de forma asincrona
     $scope.$watch("model",function(newValue,OldValue,scope){
 	if (newValue){
 	    $scope.model = JSON.parse(newValue);
@@ -38,7 +37,7 @@ var LoginController = LoginMod.controller('LoginController', ['$scope', '$http',
 
     $scope.stSubmit = function() {
 
-	console.log($scope.form);
+	console.log($scope.form, $scope.model);
 
 	$http.post('http://192.168.56.110/apirest/user/login.json',
 		   $.param({
@@ -55,6 +54,8 @@ var LoginController = LoginMod.controller('LoginController', ['$scope', '$http',
 	    });
     };
 }]);
+
+var FormMod = angular.module('Forms', []);
 
 var ownForm = FormMod.directive('ownForm', function() {
     return {

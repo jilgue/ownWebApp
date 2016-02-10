@@ -37,13 +37,8 @@ var LoginController = LoginMod.controller('LoginController', ['$scope', '$http',
 
     $scope.stSubmit = function() {
 
-	console.log($scope.form, $scope.model);
-
-	$http.post('http://192.168.56.110/apirest/user/login.json',
-		   $.param({
-		       userName: $scope.form.userName,
-		       password: $scope.form.password
-		   }),{
+	$http.post('http://192.168.56.110/apirest/user/login.json', $.param(ngGetFormModelParams($scope.form, $scope.model)),
+		   {
 		       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }}
 		  ).
 	    success(function(data, status, headers, config) {
@@ -68,6 +63,31 @@ var ownForm = FormMod.directive('ownForm', function() {
     };
 });
 
+var ngGetFormModelParams = function (form, model) {
+
+    var params = model.objectFieldSearch("field");
+
+    var ret = new Object();
+    params.forEach(function(param) {
+
+	ret[param] = form[param];
+    });
+
+    return ret;
+};
+
+Array.prototype.objectFieldSearch = function (field) {
+
+    var ret = new Array();
+    this.forEach(function(object) {
+
+	if (object[field] !== undefined) {
+	    ret.push(object[field]);
+	}
+    });
+    return ret;
+};
+
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
-}
+};

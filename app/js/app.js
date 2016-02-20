@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-var ownApp = angular.module('ownApp', ['ngRoute', 'Forms', 'Login']);
+var ownApp = angular.module('ownApp', ['ngRoute', 'ngResource', 'Forms', 'Login']);
 
 ownApp.config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -13,23 +13,35 @@ ownApp.config(function ($routeProvider, $locationProvider) {
     //$locationProvider.html5Mode(true); //activate HTML5 Mode
 });
 
+var ownREST = ownApp.factory('ownREST', function($resource){
+
+    return $resource('http://192.168.56.110/:mode/:class/:func', {},
+		     {'get': {method: 'GET',
+			      isArray: false
+			     },
+		      'save': {method: 'POST',
+			       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			       transformRequest: function (data) {
+				   return $.param(data);
+			       }
+			      }
+		     });
+});
+
 var LoginMod = angular.module('Login', []);
 
-var LoginViewController = LoginMod.controller('LoginViewController', ['$scope', '$http', function ($scope, $http) {
+var LoginViewController = LoginMod.controller('LoginViewController', ['$scope', '$http', 'ownREST', function ($scope, $http, ownREST) {
 
-    $http.get('http://192.168.56.110/apiconf/user/stLogin.json').
-	success(function(data, status, headers, config) {
-	    $scope.model = data.config;
-	}).
-	error(function(data, status, headers, config) {
-	    console.log("mal", data, status, headers, config);
-	});
+    ownREST.get({mode: 'apiconf', class: 'user', func: 'stLogin.json'}, function(response) {
+	$scope.model = response.config;
+    });
+
 }]);
 
-var LoginController = LoginMod.controller('LoginController', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
+var LoginController = LoginMod.controller('LoginController', ['$scope', '$http', '$timeout', 'ownREST', function ($scope, $http, $timeout, ownREST) {
 
     // Necesario para los formularios, ya que el model nos llega de forma asincrona
-    $scope.$watch("model",function(newValue,OldValue,scope){
+    $scope.$watch("model", function(newValue, oldValue, scope) {
 	if (newValue){
 	    $scope.model = JSON.parse(newValue);
 	}
@@ -37,15 +49,12 @@ var LoginController = LoginMod.controller('LoginController', ['$scope', '$http',
 
     $scope.stSubmit = function() {
 
-	$http.post('http://192.168.56.110/apirest/user/login.json', $.param(ngGetFormModelParams($scope.form, $scope.model)),
-		   {
-		       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }}
-		  ).
-	    success(function(data, status, headers, config) {
-		console.log("bien", data, status, headers, config);
-	    }).
-	    error(function(data, status, headers, config) {
-		console.log("mal", data, status, headers, config);
+	var post = new ownREST();
+	angular.extend(post, ngGetFormModelParams($scope.form, $scope.model));
+	console.log(post);
+	post.$save({mode: 'apirest', class: 'user', func: 'login.json'}).then(
+	    function(result) {
+		console.log(result);
 	    });
     };
 }]);

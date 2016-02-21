@@ -4,12 +4,16 @@ module.exports = function(grunt) {
 	uglify: {
 	    target: {
 		files: {
-		    'app/js/ownwebapp.min.js': ['bower_components/angular/angular.min.js',
-						'bower_components/angular-route/angular-route.min.js',
-						'bower_components/angular-resource/angular-resource.min.js',
+		    'app/js/ownwebapp.min.js': [//'bower_components/angular/angular.min.js',
+						//'bower_components/angular-route/angular-route.min.js',
+						//'bower_components/angular-resource/angular-resource.min.js',
 						'bower_components/jquery/dist/jquery.min.js',
-						'bower_components/bootstrap/dist/js/bootstrap.min.js'
-						]
+						'bower_components/bootstrap/dist/js/bootstrap.min.js',
+					       ],
+		    'app/js/require.js': ['bower_components/requirejs/require.js'],
+		    'app/js/angular.js': ['bower_components/angular/angular.min.js'],
+		    'app/js/angular-route.js': ['bower_components/angular-route/angular-route.min.js'],
+		    'app/js/angular-resource.js': ['bower_components/angular-resource/angular-resource.min.js']
 		}
 	    }
 	},

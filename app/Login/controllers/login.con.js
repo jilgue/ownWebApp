@@ -2,8 +2,9 @@
 
 define(['angular',
 	'Login/login.mod.js',
+	'Core/resources/core-rest.res.js',
        ],
-       function(angular, LoginMod) {
+       function(angular, LoginMod, ownREST) {
 
 	   return LoginMod.controller('LoginController', ['$scope', '$http', '$timeout', 'ownREST', function ($scope, $http, $timeout, ownREST) {
 

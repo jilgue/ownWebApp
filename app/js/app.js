@@ -19,20 +19,5 @@ define(['require',
 	   // Declare app level module which depends on filters, and services
 	   var ownApp = angular.module('ownApp', modules);
 
-	   var ownREST = ownApp.factory('ownREST', function($resource){
-
-	       return $resource('http://192.168.56.110/:mode/:class/:func', {},
-				{'get': {method: 'GET',
-					 isArray: false
-					},
-				 'save': {method: 'POST',
-					  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-					  transformRequest: function (data) {
-					      return $.param(data);
-					  }
-					 }
-				});
-	   });
-
 	   return ownApp;
 });

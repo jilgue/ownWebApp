@@ -2,7 +2,7 @@
 
 define(['angular',
 	'Login/login.mod.js',
-	'Forms/directives/own-form.js',
+	'Forms/directives/form.dir.js',
 	'Login/controllers/login.con.js',
        ],
        function(angular, LoginMod) {

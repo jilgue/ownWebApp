@@ -8,13 +8,13 @@ define(['angular',
        ],
        function(angular, LoginMod, ownREST) {
 
-	   var controller = ['$scope', '$http', 'ownREST', function ($scope, $http, ownREST) {
+	   var controller = function ($scope, $http, ownREST) {
 
 	       ownREST.get({mode: 'apiconf', class: 'user', func: 'stLogin.json'}, function(response) {
 		   $scope.model = response.config;
 	       });
 
-	   }];
+	   };
 	   return LoginMod.controller('LoginViewController', controller);
 	   //return function() {angular.module('Login').controller('LoginViewController', controller);};
        });

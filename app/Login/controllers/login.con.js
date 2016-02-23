@@ -11,7 +11,7 @@ define(['angular',
 	       console.log(token);
 	   }
 
-	   return LoginMod.controller('LoginController', ['$scope', '$http', '$timeout', 'ownREST', function ($scope, $http, $timeout, ownREST) {
+	   return LoginMod.controller('LoginController', function ($scope, $http, $timeout, ownREST) {
 
 	       // Necesario para los formularios, ya que el model nos llega de forma asincrona
 	       $scope.$watch("model", function(newValue, oldValue, scope) {
@@ -29,12 +29,11 @@ define(['angular',
 		       function(result) {
 			   if (result.response.token != undefined) {
 			       if(stSetCookie(result.response.token)) {
-				   $location
 			       }
 			   }
 		       });
 	       };
-	   }]);
+	   });
 
        });
 

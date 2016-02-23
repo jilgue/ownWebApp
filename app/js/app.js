@@ -9,7 +9,7 @@ define(['require',
 	'Login/login.mod.js',
 	'Forms/forms.mod.js',
 	// Route
-	'js/route.js',
+	'Core/config/core.conf.js',
        ],
 
        function (require, module, angular) {

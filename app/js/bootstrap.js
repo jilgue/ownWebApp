@@ -21,7 +21,9 @@ require.config({
 define(['require',
 	'module',
 	'angular',
-	'Core/config/core.conf.js',
+	// Route
+	'Core/config/core-route.conf.js',
+	'Login/config/login-route.conf.js',
        ],
 
        function (require, module, angular) {

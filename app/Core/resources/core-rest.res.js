@@ -13,8 +13,10 @@ define(['require',
 					 isArray: false
 					},
 				 'save': {method: 'POST',
+					  isArray: true,
 					  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 					  transformRequest: function (data) {
+					      console.log(data);
 					      return $.param(data);
 					  }
 					 }

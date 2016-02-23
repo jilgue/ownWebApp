@@ -2,13 +2,13 @@
 
 define(['require',
 	'angular',
-	//'Forms/directives/own-form',
-	//'Login/controllers/login-view.con',
-	//'Login/controllers/login.con',
+	'angular-route',
        ],
        function(require, angular) {
 
-	   var LoginMod = angular.module('Login', []);
+	   var modules = ['ui.router'];
+
+	   var LoginMod = angular.module('Login', modules);
 
 	   return LoginMod;
        });

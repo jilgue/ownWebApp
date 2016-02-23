@@ -12,7 +12,7 @@ module.exports = function(grunt) {
 					       ],
 		    'app/js/require.js': ['bower_components/requirejs/require.js'],
 		    'app/js/angular.js': ['bower_components/angular/angular.min.js'],
-		    'app/js/angular-route.js': ['bower_components/angular-route/angular-route.min.js'],
+		    'app/js/angular-route.js': ['bower_components/angular-ui-router/release/angular-ui-router.min.js'],
 		    'app/js/angular-resource.js': ['bower_components/angular-resource/angular-resource.min.js']
 		}
 	    }

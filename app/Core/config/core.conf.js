@@ -2,7 +2,7 @@
 
 define(['require',
 	'angular',
-	'js/app',
+	'Core/core.mod.js',
 	'Login/controllers/login-view.con',
        ],
        function(require, angular, ownApp, LoginViewController) {

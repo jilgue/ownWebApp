@@ -2,7 +2,7 @@
 
 define(['require',
 	'angular',
-	'js/app',
+	'Core/core.mod.js',
        ],
        function(require, angular, ownApp) {
 

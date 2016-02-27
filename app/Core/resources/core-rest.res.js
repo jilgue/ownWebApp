@@ -12,13 +12,8 @@ define(['require',
 				{'get': {method: 'GET',
 					 isArray: false
 					},
-				 'save': {method: 'POST',
-					  isArray: true,
-					  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-					  transformRequest: function (data) {
-					      console.log(data);
-					      return $.param(data);
-					  }
+				 'post': {method: 'POST',
+					  headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 					 }
 				});
 	   });

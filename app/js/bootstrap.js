@@ -24,6 +24,7 @@ define(['require',
 	// Route
 	'Core/config/core-route.conf.js',
 	'Login/config/login-route.conf.js',
+	'Apps/config/apps-route.conf.js',
        ],
 
        function (require, module, angular) {

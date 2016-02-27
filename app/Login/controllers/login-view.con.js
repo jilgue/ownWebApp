@@ -16,5 +16,4 @@ define(['angular',
 
 	   };
 	   return LoginMod.controller('LoginViewController', controller);
-	   //return function() {angular.module('Login').controller('LoginViewController', controller);};
        });

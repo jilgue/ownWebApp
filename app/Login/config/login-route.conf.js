@@ -11,7 +11,7 @@ define(['require',
 
 	       $stateProvider.state('login', {
 		   url: '/login',
-		   views: {"main": {templateUrl: 'Login/views/login.html',
+		   views: {"main": {templateUrl: 'Login/controllers/tpls/login-view.con.tpl.html',
 				    controller: 'LoginViewController'
 				   }
 			  }

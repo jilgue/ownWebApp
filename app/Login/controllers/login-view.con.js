@@ -8,7 +8,7 @@ define(['angular',
        ],
        function(angular, LoginMod, ownREST) {
 
-	   var controller = function ($scope, $http, ownREST) {
+	   var controller = function ($scope, ownREST) {
 
 	       ownREST.get({mode: 'apiconf', class: 'user', func: 'stLogin.json'}, function(response) {
 		   $scope.model = response.config;

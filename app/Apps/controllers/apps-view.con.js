@@ -6,7 +6,7 @@ define(['angular',
        ],
        function(angular, AppsMod, ownREST) {
 
-	   var controller = function ($scope, $http, ownREST) {
+	   var controller = function ($scope, ownREST) {
 	   };
 	   return AppsMod.controller('AppsViewController', controller);
        });
